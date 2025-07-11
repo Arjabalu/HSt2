@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemkund Sahib Ropeway Preference Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .survey-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .scenario {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .scenario p {
+            margin: 0 0 10px 0;
+            font-style: italic;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <h1>Hemkund Sahib Ropeway Preference Survey</h1>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label>Type of Pilgrim</label>
+                <select name="pilgrimType" id="pilgrimType" required>
+                    <option value="">Select</option>
+                    <option value="Up">Up</option>
+                    <option value="Down">Down</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Local/Non-Local</label>
+                <select name="localNonLocal" id="localNonLocal" required>
+                    <option value="">Select</option>
+                    <option value="Local">Local</option>
+                    <option value="Non-Local">Non-Local</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Name of the Respondent</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Age</label>
+                <input type="number" name="age" min="1" required>
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <select name="gender" required>
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Home Town</label>
+                <input type="text" name="homeTown" required>
+            </div>
+            <div class="form-group">
+                <label>Came as Group or Single</label>
+                <select name="groupOrSingle" id="groupOrSingle" required>
+                    <option value="">Select</option>
+                    <option value="Group">Group</option>
+                    <option value="Single">Single</option>
+                </select>
+            </div>
+            <div class="form-group hidden" id="groupSizeContainer">
+                <label>If Group, How Many Numbers</label>
+                <input type="number" name="groupSize" id="groupSize" min="2">
+            </div>
+            <div class="form-group">
+                <label>Trip Purpose</label>
+                <select name="tripPurpose" required>
+                    <option value="">Select</option>
+                    <option value="Local">Local</option>
+                    <option value="Tourist Purpose">Tourist Purpose</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Trip Frequency</label>
+                <select name="tripFrequency" required>
+                    <option value="">Select</option>
+                    <option value="Yearly">Yearly</option>
+                    <option value="Occasionally">Occasionally</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Have you visited Hemkund Sahib before?</label>
+                <select name="visitedBefore" id="visitedBefore" required>
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group hidden" id="visitCountContainer">
+                <label>How many times have you visited Hemkund Sahib?</label>
+                <input type="number" name="visitCount" id="visitCount" min="0">
+            </div>
+            <div class="form-group hidden" id="previousDestinationContainer">
+                <label>If going Up, Previous Destination</label>
+                <input type="text" name="previousDestination" id="previousDestination">
+            </div>
+            <div class="form-group hidden" id="travelModeGovindghatGhangariaContainer">
+                <label>Mode of Travel from Govindghat to Ghangaria (Upward)</label>
+                <select name="travelModeGovindghatGhangaria" id="travelModeGovindghatGhangaria">
+                    <option value="">Select</option>
+                    <option value="Walk">Walk</option>
+                    <option value="Pony">Pony</option>
+                    <option value="Doli">Doli</option>
+                </select>
+            </div>
+            <div class="form-group hidden" id="fareGovindghatGhangariaContainer">
+                <label>Fare (Govindghat to Ghangaria, in ₹)</label>
+                <input type="number" name="fareGovindghatGhangaria" id="fareGovindghatGhangaria" min="0" step="1">
+            </div>
+            <div class="form-group hidden" id="timeGovindghatGhangariaContainer">
+                <label>Time taken (Govindghat to Ghangaria, in hours)</label>
+                <input type="number" name="timeGovindghatGhangaria" id="timeGovindghatGhangaria" min="0" step="0.5">
+            </div>
+            <div class="form-group hidden" id="travelModeGhangariaHemkundContainer">
+                <label>Mode of Travel from Ghangaria to Hemkund Sahib (Upward)</label>
+                <select name="travelModeGhangariaHemkund" id="travelModeGhangariaHemkund">
+                    <option value="">Select</option>
+                    <option value="Walk">Walk</option>
+                    <option value="Pony">Pony</option>
+                    <option value="Doli">Doli</option>
+                </select>
+            </div>
+            <div class="form-group hidden" id="fareGhangariaHemkundContainer">
+                <label>Fare (Ghangaria to Hemkund Sahib, in ₹)</label>
+                <input type="number" name="fareGhangariaHemkund" id="fareGhangariaHemkund" min="0" step="1">
+            </div>
+            <div class="form-group hidden" id="timeGhangariaHemkundContainer">
+                <label>Time taken (Ghangaria to Hemkund Sahib, in hours)</label>
+                <input type="number" name="timeGhangariaHemkund" id="timeGhangariaHemkund" min="0" step="0.5">
+            </div>
+            <div class="form-group hidden" id="nextDestinationContainer">
+                <label>Coming Down, Next Destination</label>
+                <input type="text" name="nextDestination" id="nextDestination">
+            </div>
+            <div class="form-group hidden" id="travelModeHemkundGhangariaContainer">
+                <label>Mode of Travel from Hemkund Sahib to Ghangaria (Downward)</label>
+                <select name="travelModeHemkundGhangaria" id="travelModeHemkundGhangaria">
+                    <option value="">Select</option>
+                    <option value="Walk">Walk</option>
+                    <option value="Pony">Pony</option>
+                    <option value="Doli">Doli</option>
+                </select>
+            </div>
+            <div class="form-group hidden" id="fareHemkundGhangariaContainer">
+                <label>Fare (Hemkund Sahib to Ghangaria, in ₹)</label>
+                <input type="number" name="fareHemkundGhangaria" id="fareHemkundGhangaria" min="0" step="1">
+            </div>
+            <div class="form-group hidden" id="timeHemkundGhangariaContainer">
+                <label>Time taken (Hemkund Sahib to Ghangaria, in hours)</label>
+                <input type="number" name="timeHemkundGhangaria" id="timeHemkundGhangaria" min="0" step="0.5">
+            </div>
+            <div class="form-group hidden" id="travelModeGhangariaGovindghatContainer">
+                <label>Mode of Travel from Ghangaria to Govindghat (Downward)</label>
+                <select name="travelModeGhangariaGovindghat" id="travelModeGhangariaGovindghat">
+                    <option value="">Select</option>
+                    <option value="Walk">Walk</option>
+                    <option value="Pony">Pony</option>
+                    <option value="Doli">Doli</option>
+                </select>
+            </div>
+            <div class="form-group hidden" id="fareGhangariaGovindghatContainer">
+                <label>Fare (Ghangaria to Govindghat, in ₹)</label>
+                <input type="number" name="fareGhangariaGovindghat" id="fareGhangariaGovindghat" min="0" step="1">
+            </div>
+            <div class="form-group hidden" id="timeGhangariaGovindghatContainer">
+                <label>Time taken (Ghangaria to Govindghat, in hours)</label>
+                <input type="number" name="timeGhangariaGovindghat" id="timeGhangariaGovindghat" min="0" step="0.5">
+            </div>
+            <div class="form-group">
+                <label>Should walking be made mandatory as a spiritual tradition?</label>
+                <select name="mandatoryWalking" required>
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>If ropeway is optional, which option would you choose?</label>
+                <select name="ropewayChoice" required>
+                    <option value="">Select</option>
+                    <option value="Existing Mode">Existing Mode</option>
+                    <option value="Ropeway">Ropeway</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Place of Staying for this Trip</label>
+                <input type="text" name="placeOfStay" required>
+            </div>
+            <div class="form-group">
+                <label>Total Time Spending for this Visit (in Hours)</label>
+                <input type="number" name="totalTime" min="0" step="0.5" required>
+            </div>
+            <div class="form-group">
+                <label>If the ropeway reduces travel time by 90% (e.g., 10 hours to 1 hour), would you prefer it over trekking?</label>
+                <select name="ropeway90Percent" required>
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>If the ropeway reduces travel time by 95% (e.g., 10 hours to 30 minutes), would you prefer it over trekking?</label>
+                <select name="ropeway95Percent" required>
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>If the ropeway makes the yatra possible for elderly, would you recommend it to senior citizens in your family?</label>
+                <select name="recommendElderly" required>
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Only if they cannot walk">Only if they cannot walk</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Most Important Factor for Choosing Travel Mode</label>
+                <select name="importantFactor" required>
+                    <option value="">Select</option>
+                    <option value="Travel Time">Travel Time</option>
+                    <option value="Cost">Cost</option>
+                    <option value="Comfort">Comfort</option>
+                    <option value="Safety">Safety</option>
+                    <option value="Religious Sentiment">Religious Sentiment</option>
+                </select>
+            </div>
+
+            <h2>Stated Preference Scenarios</h2>
+            <p>Please select your preferred travel mode for each scenario comparing your chosen mode(s) with the ropeway option.</p>
+            <div id="scenarios"></div>
+
+            <div id="errorText" class="error"></div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Conditional logic for group size
+            const groupOrSingleSelect = document.getElementById('groupOrSingle');
+            const groupSizeContainer = document.getElementById('groupSizeContainer');
+            const groupSizeInput = document.getElementById('groupSize');
+
+            groupOrSingleSelect.addEventListener('change', function() {
+                if (this.value === 'Group') {
+                    groupSizeContainer.classList.remove('hidden');
+                    groupSizeInput.setAttribute('required', 'true');
+                } else {
+                    groupSizeContainer.classList.add('hidden');
+                    groupSizeInput.removeAttribute('required');
+                    groupSizeInput.value = '';
+                }
+            });
+
+            // Conditional logic for visit count
+            const visitedBeforeSelect = document.getElementById('visitedBefore');
+            const visitCountContainer = document.getElementById('visitCountContainer');
+            const visitCountInput = document.getElementById('visitCount');
+
+            visitedBeforeSelect.addEventListener('change', function() {
+                if (thisAlity) {
+                    visitCountContainer.classList.remove('hidden');
+                    visitCountInput.setAttribute('required', 'true');
+                } else {
+                    visitCountContainer.classList.add('hidden');
+                    visitCountInput.removeAttribute('required');
+                    visitCountInput.value = '';
+                }
+            });
+
+            // Conditional logic for pilgrim type and local/non-local
+            const pilgrimTypeSelect = document.getElementById('pilgrimType');
+            const localNonLocalSelect = document.getElementById('localNonLocal');
+            const previousDestinationContainer = document.getElementById('previousDestinationContainer');
+            const travelModeGovindghatGhangariaContainer = document.getElementById('travelModeGovindghatGhangariaContainer');
+            const fareGovindghatGhangariaContainer = document.getElementById('fareGovindghatGhangariaContainer');
+            const timeGovindghatGhangariaContainer = document.getElementById('timeGovindghatGhangariaContainer');
+            const travelModeGhangariaHemkundContainer = document.getElementById('travelModeGhangariaHemkundContainer');
+            const fareGhangariaHemkundContainer = document.getElementById('fareGhangariaHemkundContainer');
+            const timeGhangariaHemkundContainer = document.getElementById('timeGhangariaHemkundContainer');
+            const nextDestinationContainer = document.getElementById('nextDestinationContainer');
+            const travelModeHemkundGhangariaContainer = document.getElementById('travelModeHemkundGhangariaContainer');
+            const fareHemkundGhangariaContainer = document.getElementById('fareHemkundGhangariaContainer');
+            const timeHemkundGhangariaContainer = document.getElementById('timeHemkundGhangariaContainer');
+            const travelModeGhangariaGovindghatContainer = document.getElementById('travelModeGhangariaGovindghatContainer');
+            const fareGhangariaGovindghatContainer = document.getElementById('fareGhangariaGovindghatContainer');
+            const timeGhangariaGovindghatContainer = document.getElementById('timeGhangariaGovindghatContainer');
+
+            const upFields = [
+                previousDestinationContainer,
+                travelModeGovindghatGhangariaContainer,
+                fareGovindghatGhangariaContainer,
+                timeGovindghatGhangariaContainer,
+                travelModeGhangariaHemkundContainer,
+                fareGhangariaHemkundContainer,
+                timeGhangariaHemkundContainer
+            ];
+            const upInputs = [
+                document.getElementById('previousDestination'),
+                document.getElementById('travelModeGovindghatGhangaria'),
+                document.getElementById('fareGovindghatGhangaria'),
+                document.getElementById('timeGovindghatGhangaria'),
+                document.getElementById('travelModeGhangariaHemkund'),
+                document.getElementById('fareGhangariaHemkund'),
+                document.getElementById('timeGhangariaHemkund')
+            ];
+            const downFields = [
+                nextDestinationContainer,
+                travelModeHemkundGhangariaContainer,
+                fareHemkundGhangariaContainer,
+                timeHemkundGhangariaContainer,
+                travelModeGhangariaGovindghatContainer,
+                fareGhangariaGovindghatContainer,
+                timeGhangariaGovindghatContainer
+            ];
+            const downInputs = [
+                document.getElementById('nextDestination'),
+                document.getElementById('travelModeHemkundGhangaria'),
+                document.getElementById('fareHemkundGhangaria'),
+                document.getElementById('timeHemkundGhangaria'),
+                document.getElementById('travelModeGhangariaGovindghat'),
+                document.getElementById('fareGhangariaGovindghat'),
+                document.getElementById('timeGhangariaGovindghat')
+            ];
+
+            function updateFieldVisibility() {
+                const isNonLocalDown = localNonLocalSelect.value === 'Non-Local' && pilgrimTypeSelect.value === 'Down';
+                if (pilgrimTypeSelect.value === 'Up') {
+                    upFields.forEach(field => field.classList.remove('hidden'));
+                    downFields.forEach(field => field.classList.add('hidden'));
+                    downInputs.forEach(input => {
+                        input.removeAttribute('required');
+                        input.value = '';
+                    });
+                } else if (pilgrimTypeSelect.value === 'Down') {
+                    downFields.forEach(field => field.classList.remove('hidden'));
+                    if (isNonLocalDown) {
+                        upFields.forEach(field => field.classList.remove('hidden'));
+                        previousDestinationContainer.classList.add('hidden');
+                        upInputs[0].removeAttribute('required');
+                        upInputs[0].value = '';
+                    } else {
+                        upFields.forEach(field => field.classList.add('hidden'));
+                        upInputs.forEach(input => {
+                            input.removeAttribute('required');
+                            input.value = '';
+                        });
+                    }
+                }
+                updateFareVisibility('travelModeGovindghatGhangaria', 'fareGovindghatGhangariaContainer', 'fareGovindghatGhangaria');
+                updateFareVisibility('travelModeGhangariaHemkund', 'fareGhangariaHemkundContainer', 'fareGhangariaHemkund');
+                updateFareVisibility('travelModeHemkundGhangaria', 'fareHemkundGhangariaContainer', 'fareHemkundGhangaria');
+                updateFareVisibility('travelModeGhangariaGovindghat', 'fareGhangariaGovindghatContainer', 'fareGhangariaGovindghat');
+            }
+
+            pilgrimTypeSelect.addEventListener('change', updateFieldVisibility);
+            localNonLocalSelect.addEventListener('change', updateFieldVisibility);
+
+            // Conditional logic for travel fares
+            const travelModes = [
+                { modeId: 'travelModeGovindghatGhangaria', fareContainerId: 'fareGovindghatGhangariaContainer', fareInputId: 'fareGovindghatGhangaria' },
+                { modeId: 'travelModeGhangariaHemkund', fareContainerId: 'fareGhangariaHemkundContainer', fareInputId: 'fareGhangariaHemkund' },
+                { modeId: 'travelModeHemkundGhangaria', fareContainerId: 'fareHemkundGhangariaContainer', fareInputId: 'fareHemkundGhangaria' },
+                { modeId: 'travelModeGhangariaGovindghat', fareContainerId: 'fareGhangariaGovindghatContainer', fareInputId: 'fareGhangariaGovindghat' }
+            ];
+
+            function updateFareVisibility(modeId, fareContainerId, fareInputId) {
+                const modeSelect = document.getElementById(modeId);
+                const fareContainer = document.getElementById(fareContainerId);
+                const fareInput = document.getElementById(fareInputId);
+                if (modeSelect.value === 'Walk') {
+                    fareContainer.classList.add('hidden');
+                    fareInput.removeAttribute('required');
+                    fareInput.value = '';
+                } else if (modeSelect.value && modeSelect.value !== '') {
+                    fareContainer.classList.remove('hidden');
+                    fareInput.setAttribute('required', 'true');
+                }
+            }
+
+            travelModes.forEach(({ modeId, fareContainerId, fareInputId }) => {
+                const modeSelect = document.getElementById(modeId);
+                modeSelect.addEventListener('change', () => {
+                    updateFareVisibility(modeId, fareContainerId, fareInputId);
+                    updateScenarios();
+                });
+            });
+
+            // Dynamic scenario generation with 10 ropeway combinations
+            function generateScenarios(selectedModes) {
+                const ropewayOptions = [
+                    { cost: '₹1500', wait: '45 min', time: '60 min', randomNumber: 1 },
+                    { cost: '₹1750', wait: '40 min', time: '55 min', randomNumber: 2 },
+                    { cost: '₹2000', wait: '30 min', time: '55 min', randomNumber: 3 },
+                    { cost: '₹2250', wait: '15 min', time: '50 min', randomNumber: 4 },
+                    { cost: '₹2500', wait: '15 min', time: '45 min', randomNumber: 5 },
+                    { cost: '₹2750', wait: '10 min', time: '42 min', randomNumber: 6 },
+                    { cost: '₹3000', wait: '10 min', time: '40 min', randomNumber: 7 },
+                    { cost: '₹3250', wait: '5 min', time: '35 min', randomNumber: 8 },
+                    { cost: '₹3500', wait: '5 min', time: '30 min', randomNumber: 9 },
+                    { cost: '₹3750', wait: '5 min', time: '30 min', randomNumber: 10 }
+                ];
+                const modeOptions = selectedModes.map(mode => ({
+                    mode,
+                    time: mode === 'Walk' ? '9–13 hrs' : '4–5 hrs',
+                    cost: mode === 'Walk' ? '₹0' : mode === 'Pony' ? '₹1500' : '₹3000',
+                    comfort: mode === 'Walk' ? 'Low' : mode === 'Pony' ? 'Medium' : 'High',
+                    safety: 'Medium'
+                }));
+                const shuffledRopewayOptions = ropewayOptions.sort(() => Math.random() - 0.5).slice(0, 4);
+                const scenarios = [];
+                for (let i = 0; i < 4; i++) {
+                    const existingMode = modeOptions.length > 0 ? modeOptions[Math.floor(Math.random() * modeOptions.length)] : {
+                        mode: 'Walk',
+                        time: '9–13 hrs',
+                        cost: '₹0',
+                        comfort: 'Low',
+                        safety: 'Medium'
+                    };
+                    const ropewayOption = {
+                        mode: 'Ropeway',
+                        time: shuffledRopewayOptions[i].time,
+                        cost: shuffledRopewayOptions[i].cost,
+                        comfort: 'Very High',
+                        safety: 'High',
+                        wait: shuffledRopewayOptions[i].wait,
+                        randomNumber: shuffledRopewayOptions[i].randomNumber
+                    };
+                    scenarios.push({
+                        options: [
+                            { mode: existingMode.mode, text: `${existingMode.mode}: ${existingMode.time} travel time, ${existingMode.cost}, ${existingMode.comfort} comfort, ${existingMode.safety} safety`, index: i * 2 + 1 },
+                            { mode: ropewayOption.mode, text: `${ropewayOption.mode}: ${ropewayOption.time} travel time, ${ropewayOption.cost}, ${ropewayOption.comfort} comfort, ${ropewayOption.safety} safety, ${ropewayOption.wait} wait`, index: i * 2 + 2, randomNumber: ropewayOption.randomNumber }
+                        ]
+                    });
+                }
+                return scenarios;
+            }
+
+            function updateScenarios() {
+                const selectedModes = [];
+                const isNonLocalDown = localNonLocalSelect.value === 'Non-Local' && pilgrimTypeSelect.value === 'Down';
+                if (pilgrimTypeSelect.value === 'Up') {
+                    const mode1 = document.getElementById('travelModeGovindghatGhangaria').value;
+                    const mode2 = document.getElementById('travelModeGhangariaHemkund').value;
+                    if (mode1) selectedModes.push(mode1);
+                    if (mode2) selectedModes.push(mode2);
+                } else if (pilgrimTypeSelect.value === 'Down') {
+                    const mode1 = document.getElementById('travelModeHemkundGhangaria').value;
+                    const mode2 = document.getElementById('travelModeGhangariaGovindghat').value;
+                    if (mode1) selectedModes.push(mode1);
+                    if (mode2) selectedModes.push(mode2);
+                    if (isNonLocalDown) {
+                        const mode3 = document.getElementById('travelModeGovindghatGhangaria').value;
+                        const mode4 = document.getElementById('travelModeGhangariaHemkund').value;
+                        if (mode3) selectedModes.push(mode3);
+                        if (mode4) selectedModes.push(mode4);
+                    }
+                }
+                const scenarios = generateScenarios(selectedModes);
+                const scenariosDiv = document.getElementById('scenarios');
+                scenariosDiv.innerHTML = '';
+                scenarios.forEach((scenario, index) => {
+                    const scenarioDiv = document.createElement('div');
+                    scenarioDiv.classList.add('scenario');
+                    scenarioDiv.innerHTML = `
+                        <p>Scenario ${index + 1}:</p>
+                        ${scenario.options.map(opt => `
+                            <p>${opt.text}</p>
+                            <label><input type="radio" name="scenario${index}" value="${opt.mode}" required> Select ${opt.mode}</label>
+                        `).join('')}
+                        <input type="hidden" name="scenarioIndex${index}_1" value="${scenario.options[0].index}">
+                        <input type="hidden" name="scenarioIndex${index}_2" value="${scenario.options[1].index}">
+                        <input type="hidden" name="ropewayRandom${index}" value="${scenario.options[1].randomNumber || ''}">
+                    `;
+                    scenariosDiv.appendChild(scenarioDiv);
+                });
+            }
+
+            // Initial scenario display
+            updateScenarios();
+
+            // Update scenarios and fields when pilgrim type or local/non-local changes
+            pilgrimTypeSelect.addEventListener('change', updateScenarios);
+            localNonLocalSelect.addEventListener('change', updateScenarios);
+
+            // Form submission logic
+            document.getElementById('surveyForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const errorText = document.getElementById('errorText');
+                errorText.textContent = '';
+
+                const formData = new FormData(this);
+                const data = { dataSheet: {}, spSheet: {} };
+                const spFields = ['scenario0', 'scenario1', 'scenario2', 'scenario3', 'scenarioIndex0_1', 'scenarioIndex0_2', 'ropewayRandom0', 'scenarioIndex1_1', 'scenarioIndex1_2', 'ropewayRandom1', 'scenarioIndex2_1', 'scenarioIndex2_2', 'ropewayRandom2', 'scenarioIndex3_1', 'scenarioIndex3_2', 'ropewayRandom3'];
+
+                // Split form data into dataSheet and spSheet
+                formData.forEach((value, key) => {
+                    if (spFields.includes(key)) {
+                        data.spSheet[key] = value;
+                    } else {
+                        data.dataSheet[key] = value;
+                    }
+                });
+
+                // Generate a unique response ID
+                const responseId = 'RESP' + Date.now() + Math.random().toString(36).substr(2, 9);
+                data.dataSheet.responseId = responseId;
+                data.spSheet.responseId = responseId;
+
+                // Clear groupSize if not a group
+                if (data.dataSheet.groupOrSingle !== 'Group') {
+                    data.dataSheet.groupSize = '';
+                }
+
+                // Clear visitCount if not visited before
+                if (data.dataSheet.visitedBefore !== 'Yes') {
+                    data.dataSheet.visitCount = '';
+                }
+
+                // Clear fields based on pilgrim type and local/non-local
+                const isNonLocalDown = data.dataSheet.localNonLocal === 'Non-Local' && data.dataSheet.pilgrimType === 'Down';
+                if (data.dataSheet.pilgrimType === 'Up') {
+                    data.dataSheet.nextDestination = '';
+                    data.dataSheet.travelModeHemkundGhangaria = '';
+                    data.dataSheet.fareHemkundGhangaria = '';
+                    data.dataSheet.timeHemkundGhangaria = '';
+                    data.dataSheet.travelModeGhangariaGovindghat = '';
+                    data.dataSheet.fareGhangariaGovindghat = '';
+                    data.dataSheet.timeGhangariaGovindghat = '';
+                } else if (data.dataSheet.pilgrimType === 'Down' && !isNonLocalDown) {
+                    data.dataSheet.previousDestination = '';
+                    data.dataSheet.travelModeGovindghatGhangaria = '';
+                    data.dataSheet.fareGovindghatGhangaria = '';
+                    data.dataSheet.timeGovindghatGhangaria = '';
+                    data.dataSheet.travelModeGhangariaHemkund = '';
+                    data.dataSheet.fareGhangariaHemkund = '';
+                    data.dataSheet.timeGhangariaHemkund = '';
+                }
+
+                // Set fares to 0 for Walk modes
+                if (data.dataSheet.travelModeGovindghatGhangaria === 'Walk') {
+                    data.dataSheet.fareGovindghatGhangaria = '0';
+                }
+                if (data.dataSheet.travelModeGhangariaHemkund === 'Walk') {
+                    data.dataSheet.fareGhangariaHemkund = '0';
+                }
+                if (data.dataSheet.travelModeHemkundGhangaria === 'Walk') {
+                    data.dataSheet.fareHemkundGhangaria = '0';
+                }
+                if (data.dataSheet.travelModeGhangariaGovindghat === 'Walk') {
+                    data.dataSheet.fareGhangariaGovindghat = '0';
+                }
+
+                try {
+                    const response = await fetch('https://script.google.com/macros/s/AKfycbyN09GNyuE6jJ3TXp3UwveLoDyLbuk6YXpaKR2f9fwfr28BUTzCjwkyk1Nb_gaIBnNF/exec', {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        errorText.textContent = 'Submitted Successfully';
+                        errorText.style.color = 'green';
+                        setTimeout(() => {
+                            this.reset();
+                            groupSizeContainer.classList.add('hidden');
+                            groupSizeInput.removeAttribute('required');
+                            visitCountContainer.classList.add('hidden');
+                            visitCountInput.removeAttribute('required');
+                            upFields.forEach(field => field.classList.add('hidden'));
+                            downFields.forEach(field => field.classList.add('hidden'));
+                            upInputs.concat(downInputs).forEach(input => {
+                                input.removeAttribute('required');
+                                input.value = '';
+                            });
+                            travelModes.forEach(({ fareContainerId, fareInputId }) => {
+                                const fareContainer = document.getElementById(fareContainerId);
+                                const fareInput = document.getElementById(fareInputId);
+                                fareContainer.classList.add('hidden');
+                                fareInput.removeAttribute('required');
+                                fareInput.value = '';
+                            });
+                            updateScenarios();
+                        }, 2000);
+                    } else {
+                        errorText.textContent = 'Submission failed. Please try again.';
+                    }
+                } catch (error) {
+                    errorText.textContent = 'Error: ' + error.message;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
